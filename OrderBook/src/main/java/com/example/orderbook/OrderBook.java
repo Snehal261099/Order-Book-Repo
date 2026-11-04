@@ -5,6 +5,13 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Thread-confined order-book interface. Methods are deliberately synchronous; use
+ * AsyncOrderBookService when multiple producer threads submit transactions.
+ * <p>
+ * Price levels are ordered by market aggressiveness (BID descending, ASK ascending).
+ * Orders at a level are ordered by priority time and a monotonic sequence tie-breaker.
+ */
 public interface OrderBook {
     List<ExecutedTrade> add(OrderRequest request);
 
