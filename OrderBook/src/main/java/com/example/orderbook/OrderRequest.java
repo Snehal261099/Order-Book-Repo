@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
+/**
+ * Immutable command to add an order. Prices use BigDecimal to avoid binary floating-point errors.
+ */
 public record OrderRequest(String id, Side side, BigDecimal price, long quantity,
                            Instant transactionTime, String sourceId, TimeInForce timeInForce) {
     public OrderRequest {
