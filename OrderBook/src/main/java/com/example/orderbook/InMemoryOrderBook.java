@@ -4,6 +4,17 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.*;
 
+/**
+ * In-memory single-writer implementation.
+ * <p>
+ * Data structures:
+ * - TreeMap price levels: O(log L) insertion/removal and best-price lookup.
+ * - TreeSet within a level: O(log Np) priority insertion/removal.
+ * - HashMap id index: expected O(1) lookup/amend/cancel.
+ * - Transaction map retains last transaction even after cancellation/fully-filled order.
+ * <p>
+ * This class is NOT thread-safe by design. Serialize callers externally.
+ */
 public class InMemoryOrderBook implements OrderBook {
         private static final class MutableOrder {
             String id;
